@@ -6,49 +6,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const exportButton = document.getElementById('exportButton');
     const documentsList = document.getElementById('documentsList');
     const message = document.getElementById('message');
-    const documents = JSON.parse(localStorage.getItem('documents')) || [];
 
-    let currentDocumentIndex = documents.length - 1;
+    // 初始化文档数组
+    let documents = JSON.parse(localStorage.getItem('documents')) || [];
+    let currentDocumentIndex = documents.length > 0 ? documents.length - 1 : 0;
 
-    // 加载之前保存的内容
-    if (documents.length > 0) {
-        loadDocument(currentDocumentIndex);
-    } else {
-        message.textContent = '没有找到保存的内容';
-        message.style.display = 'block';
-        setTimeout(() => {
-            message.style.display = 'none';
-        }, 3000);
+    // 加载文档
+    function loadDocument(index) {
+        const document = documents[index];
+        textArea.value = document.content || '';
+        documentNameInput.value = document.name || '';
+        currentDocumentIndex = index;
+        renderDocumentsList();
     }
 
-    // 监听文本区域的变化
-    textArea.addEventListener('input', () => {
-        if (documents[currentDocumentIndex]) {
-            documents[currentDocumentIndex].content = textArea.value;
-        }
+    // 渲染文档列表
+    function renderDocumentsList() {
+        documentsList.innerHTML = '';
+        documents.forEach((doc, index) => {
+            const li = document.createElement('li');
+            li.textContent = doc.name || `文档${index + 1}`;
+            li.addEventListener('click', () => {
+                loadDocument(index);
+            });
+            documentsList.appendChild(li);
+        });
+    }
+
+    // 初始化文档列表
+    renderDocumentsList();
+
+    // 保存文档内容和名称
+    function saveDocument() {
+        documents[currentDocumentIndex] = {
+            name: documentNameInput.value,
+            content: textArea.value,
+            timestamp: Date.now()
+        };
         localStorage.setItem('documents', JSON.stringify(documents));
         message.textContent = '内容已保存';
         message.style.display = 'block';
         setTimeout(() => {
             message.style.display = 'none';
         }, 3000);
-    });
+    }
 
-    // 文档名称输入框变化
-    documentNameInput.addEventListener('input', () => {
-        if (documents[currentDocumentIndex]) {
-            documents[currentDocumentIndex].name = documentNameInput.value;
-        }
-        localStorage.setItem('documents', JSON.stringify(documents));
-    });
+    // 监听文本区域和文档名称输入框的变化
+    textArea.addEventListener('input', saveDocument);
+    documentNameInput.addEventListener('input', saveDocument);
 
     // 清除内容
     clearButton.addEventListener('click', () => {
-        if (documents[currentDocumentIndex]) {
-            documents[currentDocumentIndex].content = '';
-            textArea.value = '';
-        }
-        localStorage.setItem('documents', JSON.stringify(documents));
+        documents[currentDocumentIndex].content = '';
+        textArea.value = '';
+        saveDocument();
         message.textContent = '内容已清除';
         message.style.display = 'block';
         setTimeout(() => {
@@ -76,45 +87,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 导出文档
     exportButton.addEventListener('click', () => {
-        if (documents[currentDocumentIndex]) {
-            const content = documents[currentDocumentIndex].content;
+        const document = documents[currentDocumentIndex];
+        if (document && document.content) {
+            const content = document.content;
             const blob = new Blob([content], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${documents[currentDocumentIndex].name || '文档'}.txt`;
+            a.download = document.name || '文档.txt';
+            document.body.appendChild(a);
             a.click();
+            document.body.removeChild(a);
             URL.revokeObjectURL(url);
             message.textContent = '文档已导出';
             message.style.display = 'block';
             setTimeout(() => {
                 message.style.display = 'none';
             }, 3000);
+        } else {
+            message.textContent = '文档内容为空，无法导出';
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 3000);
         }
     });
-
-    // 加载文档
-    function loadDocument(index) {
-        const document = documents[index];
-        textArea.value = document.content    '';
-        documentNameInput.value = document.name    '';
-        currentDocumentIndex = index;
-        renderDocumentsList();
-    }
-
-    // 渲染文档列表
-    function renderDocumentsList() {
-        documentsList.innerHTML = '';
-        documents.forEach((doc, index) => {
-            const li = document.createElement('li');
-            li.textContent = doc.name    `文档${index + 1}`;
-            li.addEventListener('click', () => {
-                loadDocument(index);
-            });
-            documentsList.appendChild(li);
-        });
-    }
-
-    // 初始化文档列表
-    renderDocumentsList();
 });
