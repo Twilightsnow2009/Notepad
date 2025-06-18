@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟记事本</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="notepad">
+        <div class="document-name">
+            <label for="documentName">文档名称：</label>
+            <input type="text" id="documentName" placeholder="请输入文档名称">
+        </div>
+        <textarea id="textArea" placeholder="开始输入内容..."></textarea>
+        <div class="buttons">
+            <button id="clearButton">清除内容</button>
+            <button id="newDocumentButton">新建文档</button>
+            <button id="exportButton">导出文档</button>
+        </div>
+        <div class="documents-list">
+            <h4>文档列表：</h4>
+            <ul id="documentsList"></ul>
+        </div>
+        <div class="message" id="message"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
