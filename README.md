@@ -1,39 +1,41 @@
-# Notepad
+#笔记本
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![许可证](https://img.shields.io/badge/license-MIT-blue.svg)
+![版本](https://img.shields.io/badge/version-1.0.0-green.svg)
 
-一个使用HTML、CSS和JavaScript构建的现代网页记事本应用，支持本地存储、文档管理和导出功能。
+一个使用HTML、CSS和Java Script语言构建的现代网页记事本应用,支持本地存储、文档管理和导出功能。
 
 ## 功能亮点
 - 📝 实时文本编辑与自动保存
 - 📂 文档列表管理与快速切换
 - 💾 本地存储确保数据持久化
-- 📤 支持TXT格式导出
+-📤 支持文本文件（textfile）格式导出
 - 🎨 响应式设计适配各种设备
 - ⚡ 轻量级实现无依赖
-
+## 演示网址
+演示网址:https://share.htmlput.com/p/9hioe9rysn?lang=zh
+温馨提示:由于该域名的服务器在境外,该网站使用免费托管服务(htmlput)[这里不是打广告] 请勿输入任何敏感信息,如因访问该网站时造成的所有损失,该项目开发者不承担任何责任！！！
 ## 技术栈
-- **前端**：HTML5, CSS3, JavaScript
-- **存储**：浏览器LocalStorage
+- **前端**:HTML5、CSS3、JavaScript
+- **存储**：浏览器本地存储
 - **构建**：无（纯静态网站）
 
 ## 安装部署
 ### 本地部署
 1. 克隆仓库：
-```bash
-git clone https://github.com/Twilightsnow2009/Notepad
+```尝试
+git克隆https://github.com/Twilightsnow2009/Notepad
 ```
 2. 打开项目目录：
-```bash
-cd notepad
+```尝试
+cd记事本
 ```
 3. 直接在浏览器中打开`index.html`文件
 
 ### 生产部署
 将项目文件上传至任意静态文件服务器即可访问，推荐使用：
-- GitHub Pages
-- Vercel
+-GitHub页面
+-韦尔塞尔
 - Netlify
 
 ## 使用指南
