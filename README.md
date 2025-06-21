@@ -1,7 +1,6 @@
 #笔记本
 
 ![许可证](https://img.shields.io/badge/license-MIT-blue.svg)
-![版本](https://img.shields.io/badge/version-1.0.0-green.svg)
 
 一个使用HTML、CSS和Java Script语言构建的现代网页记事本应用,支持本地存储、文档管理和导出功能。
 
@@ -14,7 +13,7 @@
 - ⚡ 轻量级实现无依赖
 ## 演示网址
 演示网址:https://share.htmlput.com/p/9hioe9rysn?lang=zh
-温馨提示:由于该域名的服务器在境外,该网站使用免费托管服务(htmlput)[这里不是打广告] 请勿输入任何敏感信息,如因访问该网站时造成的所有损失,该项目开发者不承担任何责任！！！
+温馨提示:由于该域名的服务器在境外,该网站使用免费托管服务。请勿输入任何敏感信息,如因访问该网站时造成的所有损失,该项目开发者不承担任何责任！！！
 ## 技术栈
 - **前端**:HTML5、CSS3、JavaScript
 - **存储**：浏览器本地存储
